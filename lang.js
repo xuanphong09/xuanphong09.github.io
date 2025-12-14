@@ -1,7 +1,7 @@
 const translations = {
     vi: {
-        title: "Món Quà Đặc Biệt Cho Bạn 🎁",
-        description: "Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!",
+        title: "Happy Birthday To Em Iu 🎁",
+        description: "Happy Birthday To Em Iu 🎁",
         login: "Đăng nhập bằng Google",
         logout: "Đăng xuất",
         settings: "Cài Đặt Trang Web",
