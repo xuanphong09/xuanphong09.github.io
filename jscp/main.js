@@ -1921,3 +1921,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+document.addEventListener(
+    "keydown",
+    function (e) {
+        if (e.code === "Space") {
+            e.preventDefault();
+            e.stopImmediatePropagation(); // 🔥 rất quan trọng
+        }
+    },
+    true // 👈 CAPTURE
+);
