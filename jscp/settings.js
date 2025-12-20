@@ -4,7 +4,7 @@ const closeModal = document.querySelector(".close");
 let pages = [];
 const applySettingsButton = document.getElementById("applySettings");
 
-const YOUR_BIRTHDAY = "2025-12-20 00:00:00";
+const YOUR_BIRTHDAY = "2025-12-23 00:00:00";
 const currentTime = new Date().getTime();
 const targetTime = new Date(YOUR_BIRTHDAY).getTime();
 
