@@ -4,7 +4,8 @@ let matrixInterval = null;
 const confettiPool = [];
 const maxConfetti = 50;
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
+let hasSwitchedToTextMusic = false;
+let isInCountdown = false;
 
 function createConfetti() {
     const confetti = document.createElement("div");
@@ -403,10 +404,12 @@ S.UI = (function () {
 
             switch (action) {
                 case 'countdown':
+                    isInCountdown = true;
                     value = parseInt(value) || 10;
                     value = value > 0 ? value : 10;
                     timedAction(function (index) {
                         if (index === 0) {
+                            isInCountdown = false;
                             if (sequence.length === 0) {
                                 S.Shape.switchShape(S.ShapeBuilder.letter(''));
                             } else {
@@ -509,6 +512,24 @@ S.UI = (function () {
                     break;
 
                 default:
+
+                    const audio = document.getElementById("birthdayAudio");
+
+                    // ✅ CHỈ đổi nhạc 1 lần
+                    // ✅ KHÔNG trong countdown
+                    if (
+                        !isInCountdown &&
+                        !hasSwitchedToTextMusic &&
+                        audio
+                    ) {
+                        hasSwitchedToTextMusic = true;
+
+                        audio.pause();
+                        audio.currentTime = 0;
+                        audio.src = TEXT_MUSIC;
+                        audio.loop = true;
+                        audio.play().catch(() => {});
+                    }
                     S.Shape.switchShape(S.ShapeBuilder.letter(current[0] === cmd ? 'What?' : current));
             }
         }, getDynamicDelay(sequence[0]), sequence.length);
@@ -527,6 +548,16 @@ S.UI = (function () {
     return {
         simulate: function (action) {
             if (isLandscape || !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+                        hasSwitchedToTextMusic = false;
+        isInCountdown = true;
+                const audio = document.getElementById("birthdayAudio");
+                if (audio) {
+                    audio.src = COUNTDOWN_MUSIC;
+                    audio.loop = true;
+                    audio.play().catch(() => {});
+                    isPlaying = true;
+                }
                 performAction(action);
             }
         },
@@ -985,7 +1016,7 @@ function showBook() {
                 // Delay music toggle
                 setTimeout(() => {
                     if (!isPlaying) {
-                        toggleMusic();
+                        // toggleMusic();
                     }
                 }, 800);
             });
@@ -1076,7 +1107,7 @@ function showFirework() {
 // 3. Tối ưu hóa hiệu ứng trái tim ảnh với throttling
 const photoCache = new Map();
 let heartPhotosCreated = 0;
-const maxHeartPhotos = 30;
+const maxHeartPhotos = 50;
 
 function preloadPhoto(url) {
     if (photoCache.has(url)) {
@@ -1099,21 +1130,44 @@ function createHeartPhotoCentered(idx, total) {
     photo.src = photoUrl;
     photo.className = 'photo';
     photo.style.zIndex = '300';
+    photo.style.animation = 'heartbeat 2s infinite';
+    photo.style.transition = 'all 2s cubic-bezier(0.22, 1, 0.36, 1)';
 
     // Tối ưu hóa vị trí tính toán
-    const centerX = window.innerWidth * 0.5;
-    const centerY = window.innerHeight * 0.5;
-    const t = (idx / total) * 2 * Math.PI;
+    // const centerX = window.innerWidth * 0.5;
+    // const centerY = window.innerHeight * 0.5;
+    // const t = (idx / total) * 2 * Math.PI;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    const size = Math.min(vw, vh); // 🔥 then chốt
+
+    const centerX = vw / 2;
+    const centerY = vh / 2 - size * 0.08;
 
     // Tối ưu hóa scale calculation
-    const isLandscapeMobile = window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
-    const scale = isLandscapeMobile ? 8 : 16;
+    // const isLandscapeMobile = window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+    // const scale = isLandscapeMobile ? 14 : 30;
 
-    // Tính toán vị trí heart shape
+    // // Tính toán vị trí heart shape
+    // const sin_t = Math.sin(t);
+    // const cos_t = Math.cos(t);
+    // const targetX = scale * 16 * Math.pow(sin_t, 3);
+    // const targetY = -scale * (13 * cos_t - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+    const t = (idx / total) * 2 * Math.PI;
     const sin_t = Math.sin(t);
     const cos_t = Math.cos(t);
+
+    const scale = size / 40; // chỉnh 20–25 tuỳ thích
+
     const targetX = scale * 16 * Math.pow(sin_t, 3);
-    const targetY = -scale * (13 * cos_t - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+    const targetY = -scale * 1.1 * (
+        13 * cos_t
+        - 5 * Math.cos(2 * t)
+        - 2 * Math.cos(3 * t)
+        - Math.cos(4 * t)
+    );
 
     // Set initial position
     photo.style.left = centerX + 'px';
@@ -1213,12 +1267,35 @@ function checkBookFinished() {
             setTimeout(() => {
                 const currentSettings = window.settings || settings;
                 if (currentSettings.enableHeart) {
+                     setTimeout(() => {
+                        showCenterHeartText("ANH YÊU EM ❤️");
+                     }, 7000);
                     startHeartEffect();
                 }
             }, 1000);
         }
     }
 }
+
+function showCenterHeartText(text, delay = 350) {
+    const el = document.createElement("div");
+    el.className = "heart-center-text";
+    el.innerText = "";
+    document.body.appendChild(el);
+
+    const words = text.split(" ");
+    let index = 0;
+
+    const timer = setInterval(() => {
+        el.innerText += (index === 0 ? "" : " ") + words[index];
+        index++;
+
+        if (index >= words.length) {
+            clearInterval(timer);
+        }
+    }, delay);
+}
+
 
 function nextPage() {
     const totalPhysicalPages = Math.ceil(pages.length / 2);

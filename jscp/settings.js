@@ -14,7 +14,8 @@ seconds = Math.floor((timeDifference )/1000);
 let timeCustom = document.getElementById("timeCustom");
 timeCustom.value = seconds;
 
-console.log("Initial seconds:", seconds);
+const COUNTDOWN_MUSIC = "./music/happy-birthday.mp3";
+const TEXT_MUSIC = "./music/HappyBirthdaytoYou.mp3";
 
 let settings = {
     colorTheme: "pink",
@@ -24,26 +25,124 @@ let settings = {
     matrixColor1: "#ff69b4", // Màu pink mẫu
     matrixColor2: "#ff1493", // Màu pink mẫu
     // sequence: "HAPPY|BIRTHDAY|TO|EM|VINH|IU|❤",
-    sequence: "CHÚC|MỪNG|SINH|NHẬT|EM|BÉ|VINH|IU|CỦA|ANH|❤",
+    sequence: "CHÚC|MỪNG|SINH|NHẬT|BÉ|VINH|IU|CỦA|ANH|❤",
     sequenceColor: "#ff69b4", // Màu pink mẫu
     gift: "./gif/Cat Love GIF by KIKI.gif",
     pages: [
         {
-            image: "./image/1.png",
+            image: "./image/1.jpg",
         },
         {
-            image: "./image/2.png",
+            image: "./image/2.jpg",
         },
         {
-            image: "./image/3.png",
-            content: "123",
+            image: "./image/3.jpg",
+            content: "Sinh nhật bé iu 23/12/2024 nè",
         },
         {
-            image: "./image/4.png",
+            image: "./image/4.jpg",
         },
         {
-            image: "./image/5.png",
-            content: "em iu",
+            image: "./image/5.jpg",
+            content: "Countdown 2025 cùng anh nè",
+        },
+        {
+            image: "./image/6.jpg",
+        },
+        {
+            image: "./image/7.jpg",
+            content: "Cùng nhau xem pháo hoa nè",
+        },
+        {
+            image: "./image/8.jpg",
+        },
+        {
+            image: "./image/9.jpg",
+            content: "Đi học cùng bé iu",
+        },
+        {
+            image: "./image/10.jpg",
+        },
+        {
+            image: "./image/11.jpg",
+            content: "Bé iu lúc nào cũng cute",
+        },
+        {
+            image: "./image/12.jpg",
+        },
+        {
+            image: "./image/13.jpg",
+            content: "Công chúa iuiu của anh",
+        },
+        {
+            image: "./image/14.jpg",
+        },
+        {
+            image: "./image/15.jpg",
+            content: "Đi chơi cùng nhau nè",
+        },
+        {
+            image: "./image/16.jpg",
+        },
+        {
+            image: "./image/17.jpg",
+            content: "Hàm cá mập đáng yêu",
+        },
+        {
+            image: "./image/18.jpg",
+        },
+        {
+            image: "./image/19.jpg",
+            content: "Bé iu matcha latte",
+        },
+        {
+            image: "./image/20.jpg",
+        },
+        {
+            image: "./image/21.jpg",
+            content: "Đi VEC cùng bé iu lần thứ n :))",
+        },
+        {
+            image: "./image/22.jpg",
+        },
+        {
+            image: "./image/23.jpg",
+            content: "Xem phim cùng em iu nè <3",
+        },
+        {
+            image: "./image/24.jpg",
+        },
+        {
+            image: "./image/25.jpg",
+            content: "Ai mà đáng iu vậy ta",
+        },
+        {
+            image: "./image/26.jpg",
+        },
+        {
+            image: "./image/27.jpg",
+            content: "Chúc bé iu tuổi mới luôn cười như thế này",
+        },
+        {
+            image: "./image/28.jpg",
+        },
+        {
+            image: "./image/29.jpg",
+            content: "Cười tươi lên nào",
+        },
+        {
+            image: "./image/30.jpg",
+        },
+        {
+            image: "./image/31.jpg",
+            content: "I love you",
+        },
+        {
+            image: "./image/32.jpg",
+        },
+        {
+            image: "./image/33.jpg",
+            content: "Cây thông noel xinh quá",
         },
     ],
     enableBook: true,
