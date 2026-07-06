@@ -1,350 +1,323 @@
-
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday To Em Iu 🎁</title>
-    <meta name="language" content="zh-CN">
-    <meta name="description" content="Happy Birthday To Em Iu 🎁">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./image/phong.png" type="image/png">
+    <link rel="apple-touch-icon" href="./image/phong.png">
 
-    <!-- Favicon and Icons -->
-    <link rel="icon" href="./image/vv.png" type="image/png">
-    <link rel="apple-touch-icon" href="./image/vv.png">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Happy Birthday To Em Iu 🎁">
-    <meta property="og:description"
-        content="Happy Birthday To Em Iu 🎁">
-    <meta property="og:image" content="https://happybirthdaydeargift.vercel.app/image/logo.png">
-    <!-- <meta property="og:url" content="https://happybirthdaydeargift.vercel.app/?websiteId=686d4ef53c910ba1bee5ec5c"> -->
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Happy Birthday To Em Iu 🎁">
-    <meta name="twitter:description"
-        content="Happy Birthday To Em Iu 🎁">
-    <meta name="twitter:image" content="https://happybirthdaydeargift.vercel.app/image/birthday-gift.jpg">
-
-    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <meta name="description" content="Portfolio cá nhân của Phong - Fresher Backend Developer, tập trung Laravel, ASP.NET Core, MySQL và RESTful API." />
+  <title>Phong | Fresher Backend Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#066140',
+              gold: '#F6A309',
+              brown: '#4E3636',
+              soft: '#F3FBF8'
+            }
+          },
+          boxShadow: {
+            soft: '0 20px 60px rgba(6, 97, 64, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
 </head>
+<body class="bg-white text-slate-800 antialiased">
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-white/85 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Main navigation">
+      <a href="#home" class="flex items-center gap-3 font-bold text-brand-green">
+        <img
+            src="./image/phong.png"
+            alt="Ảnh đại diện của Phong"
+            class="h-10 w-10 rounded-full object-cover shadow-soft ring-4 ring-white"
+        />
+        <span>Phong</span>
+      </a>
 
-<body>
-    <button id="langSwitchBtn"
-        style="position:fixed;top:20px;right:150px;z-index:10000004;padding:8px 16px;border-radius:8px;background:#fff;color:#222;border:1px solid #dadce0;cursor:pointer;">
-        EN/VI
-    </button>
-    <!-- Google Login Button -->
-    <div id="googleAuthContainer" style="
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 10003;
-        font-family: Arial, sans-serif;
-    ">
-        <button id="googleLoginBtn" style="
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background: none;
-            border: 1px solid #dadce0;
-            border-radius: 24px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #3c4043;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        ">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="#4285f4"
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34a853"
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#fbbc05"
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#ea4335"
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-            </svg>
-        </button>
+      <button id="menuButton" class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 md:hidden" aria-expanded="false" aria-controls="mobileMenu">
+        Menu
+      </button>
 
-        <div id="userInfo" style="
-            display: none;
-            align-items: center;
-            padding: 8px 12px;
-            background: none;
-            border: 1px solid #dadce0;
-            border-radius: 24px;
-            font-size: 14px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        ">
-            <img id="userAvatar" style="
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                margin-right: 8px;
-            ">
-            <div style="margin-right: 12px;">
-                <div id="userName" style="font-weight: 500; color: #ffffff;"></div>
-                <div id="userEmail" style="font-size: 12px; color: #ffffff;"></div>
-            </div>
-            <button id="logoutBtn"
-                style="padding: 4px 8px; background: none; border: 1px solid #dadce0; border-radius: 4px; font-size: 12px; cursor: pointer; color: #fbfbfc;"
-                data-i18n="logout">Đăng xuất</button>
-        </div>
+      <div class="hidden items-center gap-7 text-lg font-medium text-slate-600 md:flex">
+        <a class="hover:text-brand-green" href="#about">Giới thiệu</a>
+        <a class="hover:text-brand-green" href="#skills">Kỹ năng</a>
+        <a class="hover:text-brand-green" href="#projects">Dự án</a>
+        <a class="hover:text-brand-green" href="#education">Học vấn</a>
+        <a class="hover:text-brand-green" href="#contact">Liên hệ</a>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden border-t border-slate-100 bg-white px-5 py-4 md:hidden">
+      <div class="flex flex-col gap-3 text-sm font-medium text-slate-700">
+        <a href="#about">Giới thiệu</a>
+        <a href="#skills">Kỹ năng</a>
+        <a href="#projects">Dự án</a>
+        <a href="#education">Học vấn</a>
+        <a href="#contact">Liên hệ</a>
+      </div>
     </div>
+  </header>
 
+  <main id="home">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-brand-soft pt-28">
+      <div class="absolute -right-24 top-24 h-72 w-72 rounded-full bg-brand-gold/20 blur-3xl"></div>
+      <div class="absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-brand-green/10 blur-3xl"></div>
 
+      <div class="mx-auto grid max-w-6xl gap-12 px-5 py-20 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-28">
+        <div class="relative z-10">
+          <p class="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-green shadow-sm">
+            Fresher Backend Developer
+          </p>
+          <h1 class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            Xin chào, mình là <span class="text-brand-green">Phong</span>.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            Mình định hướng phát triển Backend với Laravel và ASP.NET Core, tập trung xây dựng ứng dụng web thực tế, RESTful API, thiết kế cơ sở dữ liệu và tối ưu trải nghiệm quản trị hệ thống.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#projects" class="rounded-2xl bg-brand-green px-6 py-3 text-center font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-green-800">
+              Xem dự án
+            </a>
+            <a href="https://github.com/xuanphong09" target="_blank" rel="noreferrer" class="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-center font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-brand-green hover:text-brand-green">
+              GitHub
+            </a>
+            <a href="mailto:phamxuanphong333@gmail.com" class="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-center font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-brown">
+              Liên hệ
+            </a>
+          </div>
+
+          <div class="mt-10 grid max-w-2xl grid-cols-3 gap-4">
+            <div class="rounded-3xl bg-white p-4 shadow-sm">
+              <p class="text-2xl font-bold text-brand-green">3.66</p>
+              <p class="mt-1 text-sm text-slate-500">GPA / 4.0</p>
+            </div>
+            <div class="rounded-3xl bg-white p-4 shadow-sm">
+              <p class="text-2xl font-bold text-brand-green">3+</p>
+              <p class="mt-1 text-sm text-slate-500">Dự án</p>
+            </div>
+            <div class="rounded-3xl bg-white p-4 shadow-sm">
+              <p class="text-2xl font-bold text-brand-green">2022</p>
+              <p class="mt-1 text-sm text-slate-500">CNTT</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 flex items-center justify-center lg:justify-end">
+          <div class="relative w-full max-w-sm rounded-[2rem] bg-white p-6 shadow-soft">
+            <div class="absolute -right-4 -top-4 h-20 w-20 rounded-3xl bg-brand-gold"></div>
+            <div class="absolute -bottom-4 -left-4 h-20 w-20 rounded-3xl bg-brand-green"></div>
+            <div class="relative rounded-[1.5rem] border border-slate-100 bg-gradient-to-br from-white to-brand-soft p-6">
+              <div class="grid h-28 w-28 place-items-center rounded-full bg-brand-green text-5xl font-extrabold text-white shadow-soft">
+                P
+              </div>
+              <h2 class="mt-6 text-2xl font-bold text-slate-950">Phong</h2>
+              <p class="mt-2 text-brand-green font-semibold">Fresher Backend Developer</p>
+              <div class="mt-6 space-y-3 text-md text-slate-600">
+                <p><strong class="text-slate-900">Email:</strong> phamxuanphong333@gmail.com</p>
+                <p><strong class="text-slate-900">Location:</strong> Gia Lâm, Hà Nội</p>
+                <p><strong class="text-slate-900">Focus:</strong> Laravel, ASP.NET Core, MySQL</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-6xl px-5 py-20 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-gold">About me</p>
+          <h2 class="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl">Giới thiệu</h2>
+        </div>
+        <div class="rounded-[2rem] border border-slate-100 bg-white p-7 shadow-sm">
+          <p class="text-lg leading-8 text-slate-600">
+            Mình là sinh viên Công nghệ thông tin, chuyên ngành Công nghệ phần mềm tại Học viện Nông nghiệp Việt Nam. Mình yêu thích phát triển backend, thiết kế cơ sở dữ liệu và xây dựng các module quản trị có tính ứng dụng thực tế.
+          </p>
+          <p class="mt-4 text-lg leading-8 text-slate-600">
+            Trong các dự án học tập và nghiên cứu, mình đã tham gia xây dựng hệ thống cổng thông tin, quản lý chương trình đào tạo, quản lý thư viện và website hỗ trợ sinh viên.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="bg-slate-50 py-20">
+      <div class="mx-auto max-w-6xl px-5 lg:px-8">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-gold">Skills</p>
+          <h2 class="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl">Kỹ năng chuyên môn</h2>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <article class="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+            <h3 class="text-xl font-bold text-brand-green">Backend</h3>
+            <p class="mt-4 leading-7 text-slate-600">PHP, Laravel, ASP.NET Core, RESTful API, MVC</p>
+          </article>
+          <article class="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+            <h3 class="text-xl font-bold text-brand-green">Frontend</h3>
+            <p class="mt-4 leading-7 text-slate-600">HTML/CSS, JavaScript, ReactJS, Tailwind CSS, Bootstrap, Livewire</p>
+          </article>
+          <article class="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+            <h3 class="text-xl font-bold text-brand-green">Database</h3>
+            <p class="mt-4 leading-7 text-slate-600">MySQL, SQL Server, Database Design</p>
+          </article>
+          <article class="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100">
+            <h3 class="text-xl font-bold text-brand-green">Tools</h3>
+            <p class="mt-4 leading-7 text-slate-600">Git, GitHub, Composer, npm, Laragon</p>
+          </article>
+          <article class="rounded-[2rem] bg-white p-6 shadow-sm ring-1 ring-slate-100 md:col-span-2">
+            <h3 class="text-xl font-bold text-brand-green">Others</h3>
+            <p class="mt-4 leading-7 text-slate-600">OOP, CRUD, Authentication, Authorization, Deployment cơ bản, Debugging</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="mx-auto max-w-6xl px-5 py-20 lg:px-8">
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-gold">Projects</p>
+          <h2 class="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl">Dự án tiêu biểu</h2>
+        </div>
+        <a href="https://github.com/xuanphong09" target="_blank" rel="noreferrer" class="font-semibold text-brand-green hover:text-green-800">Xem GitHub →</a>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <article class="group rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-soft lg:col-span-2">
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Laravel 12</span>
+            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">MySQL</span>
+            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Livewire</span>
+            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Tailwind CSS</span>
+            <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Alpine.js</span>
+          </div>
+          <h3 class="mt-5 text-2xl font-extrabold text-slate-950">FITA Education Portal</h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Hệ thống cổng thông tin và quản lý lộ trình đào tạo cho Khoa Công nghệ thông tin. Dự án hỗ trợ quản trị bài viết đa ngôn ngữ, phân quyền người dùng, kiểm duyệt nội dung và tra cứu chương trình đào tạo.
+          </p>
+          <ul class="mt-5 space-y-3 text-md leading-6 text-slate-600">
+            <li>• Xây dựng module quản lý chương trình đào tạo theo ngành, chuyên ngành, phiên bản và học kỳ.</li>
+            <li>• Thiết kế cơ sở dữ liệu cho bài viết, danh mục, môn học, chương trình đào tạo và người dùng.</li>
+            <li>• Tích hợp đăng nhập, upload file, tìm kiếm, phân trang và giao diện quản trị bằng Livewire.</li>
+          </ul>
+          <a href="https://st-dse.vnua.edu.vn" target="_blank" rel="noreferrer" class="mt-6 inline-flex font-semibold text-brand-green hover:text-green-800 me-8">Trang web →</a>
+          <a href="https://github.com/xuanphong09/fita-education-portal" target="_blank" rel="noreferrer" class="mt-6 inline-flex font-semibold text-brand-green hover:text-green-800">GitHub →</a>
+        </article>
+
+        <div class="grid gap-6">
+            <article class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+                <div class="flex flex-wrap gap-2">
+                <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Laravel</span>
+                <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">MySQL</span>
+                <span class="rounded-full bg-brand-green/10 px-3 py-1 text-xs font-bold text-brand-green">Livewire</span>
+                </div>
+                <h3 class="mt-5 text-xl font-extrabold text-slate-950">Lab Management</h3>
+                <p class="mt-3 leading-7 text-slate-600">Website quản lý phòng lab, với các chức năng quản lý lịch sử dụng phòng Lab, người dùng, trang thiết bị,...</p>
+                <div class="flex justify-between">
+                    <a href="Follow link (ctrl + click)" target="_blank" rel="noreferrer" class="mt-5 inline-flex font-semibold text-brand-green hover:text-green-800 me-8">Trang web →</a>
+                    <a href="https://github.com/NguyenPhuongNam-VNUA/st.support-student" target="_blank" rel="noreferrer" class="mt-5 inline-flex font-semibold text-brand-green hover:text-green-800">GitHub →</a>
+                </div>
+            </article>
+          <article class="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-full bg-brand-gold/15 px-3 py-1 text-xs font-bold text-brand-brown">.NET Framework</span>
+              <span class="rounded-full bg-brand-gold/15 px-3 py-1 text-xs font-bold text-brand-brown">SQL Server</span>
+            </div>
+            <h3 class="mt-5 text-xl font-extrabold text-slate-950">Library Management System</h3>
+            <p class="mt-3 leading-7 text-slate-600">Phần mềm quản lý thư viện với các chức năng mượn/trả sách, quản lý sách và quản lý độc giả.</p>
+            <a href="https://github.com/xuanphong09/BTL.LTNet-QLTV" target="_blank" rel="noreferrer" class="mt-5 inline-flex font-semibold text-brand-green hover:text-green-800">GitHub →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="bg-brand-green py-20 text-white">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-gold">Education</p>
+          <h2 class="mt-3 text-3xl font-extrabold sm:text-4xl">Học vấn & hoạt động</h2>
+        </div>
+        <div class="space-y-5">
+          <article class="rounded-[2rem] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur">
+            <div class="flex flex-col justify-between gap-2 sm:flex-row">
+              <h3 class="text-xl font-bold">Học viện Nông nghiệp Việt Nam</h3>
+              <p class="font-semibold text-brand-gold">2022 - Nay</p>
+            </div>
+            <p class="mt-3 text-white/85">Công nghệ thông tin - Chuyên ngành Công nghệ phần mềm</p>
+            <p class="mt-3 text-white/85">GPA: <strong>3.66/4.0</strong></p>
+            <p class="mt-3 text-white/85">Sinh viên Giỏi 2022-2023, Sinh viên Xuất sắc 2023-2026</p>
+          </article>
+          <article class="rounded-[2rem] bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur">
+            <div class="flex flex-col justify-between gap-2 sm:flex-row">
+              <h3 class="text-xl font-bold">Nhóm ST</h3>
+              <p class="font-semibold text-brand-gold">10/2023 - 06/2025</p>
+            </div>
+            <p class="mt-3 text-white/85">Thành viên nhóm nghiên cứu và phát triển phần mềm hệ thống thông minh.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mx-auto max-w-6xl px-5 py-20 lg:px-8">
+      <div class="rounded-[2rem] bg-slate-950 p-8 text-white shadow-soft sm:p-10 lg:p-12">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-gold">Contact</p>
+            <h2 class="mt-3 text-3xl font-extrabold sm:text-4xl">Cùng trao đổi về cơ hội phù hợp</h2>
+            <p class="mt-5 max-w-2xl leading-8 text-white/70">
+              Mình đang tìm kiếm cơ hội Fresher/Intern Backend Developer, đặc biệt với Laravel, PHP, ASP.NET Core và MySQL.
+            </p>
+          </div>
+          <div class="space-y-4 rounded-[1.5rem] bg-white/5 p-6 ring-1 ring-white/10">
+            <a href="mailto:phamxuanphong333@gmail.com" class="block rounded-2xl bg-white px-5 py-4 font-semibold text-slate-950 transition hover:-translate-y-0.5">phamxuanphong333@gmail.com</a>
+            <a href="tel:+84396523673" class="block rounded-2xl bg-white/10 px-5 py-4 font-semibold text-white ring-1 ring-white/10 transition hover:-translate-y-0.5">(+84) 39 6523 673</a>
+            <a href="https://github.com/xuanphong09" target="_blank" rel="noreferrer" class="block rounded-2xl bg-white/10 px-5 py-4 font-semibold text-white ring-1 ring-white/10 transition hover:-translate-y-0.5">github.com/xuanphong09</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-100 py-8">
+    <div class="mx-auto flex max-w-6xl flex-col justify-between gap-3 px-5 text-sm text-slate-500 sm:flex-row lg:px-8">
+      <p>© <span id="year"></span> Phong. All rights reserved.</p>
+      <p>Built with HTML, Tailwind CSS & JavaScript.</p>
     </div>
-    <canvas id="matrix-rain" style="display: none;"></canvas>
-    <canvas style="position:absolute;width:100%;height:100%;z-index:9999;display:none;" class="canvas"></canvas>
-    <div class="overlay">
-        <div class="stars-container" id="starsContainer"></div>
-        <img id="gift-image" src="happy.gif"
-            style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-width: 80%; max-height: 80%;" />
-        <div class="content-display" id="contentDisplay">
-            <p id="contentText"></p>
-        </div>
-        <div class="firework-container" id="fireworkContainer"></div>
-        <div class="book-container">
-            <div class="book" id="book"></div>
-        </div>
+  </footer>
 
-        <button class="music-control" id="musicControl" title="Play/Pause Music">
-            ▶
-        </button>
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const year = document.getElementById('year');
 
-        <button class="settings-button" id="settingsButton" title="Settings">
-            ⚙
-        </button>
+    year.textContent = new Date().getFullYear();
 
-        <!-- Settings hint element -->
-        <div id="settingsHint" class="settings-hint">
-            <div class="hint-text" data-i18n="settingsHint">ấn vào đây để setting theo ý muốn</div>
-        </div>
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+    });
 
-        <div id="settingsModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 data-i18n="settings">⚙️ Cài Đặt Trang Web</h2>
-                    <span class="close">×</span>
-                </div>
-                <div class="modal-body">
-                    <div class="settings-section">
-                        <h3 data-i18n="music">🎵 Cài Đặt Âm Thanh</h3>
-                        <div class="form-group">
-                            <label for="backgroundMusic" data-i18n="backgroundMusic">Nhạc Nền:</label>
-                            <div class="music-select-row">
-                                <select id="backgroundMusic">
-                                    <option value="" disabled selected>Đang tải danh sách nhạc...</option>
-                                </select>
-                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Nghe thử</button>
-                            </div>
-                            <span id="musicPreviewStatus" class="music-preview-status">Chọn bài nhạc rồi nhấn "Nghe thử"</span>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="countdown">⏰ Cài Đặt Thời Gian</h3>
-                        <div class="form-group">
-                            <label for="countdownTime" data-i18n="countdownTime">Thời Gian Đếm Ngược:</label>
-                            <select id="countdownTime">
-                                <option id="timeCustom" value="30" data-i18n="sec3">3 giây</option>
-                                <option value="5" data-i18n="sec5">5 giây</option>
-                                <option value="10" data-i18n="sec10">10 giây</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="matrix">🌧️ Cài Đặt Hiệu Ứng Mưa Chữ</h3>
-                        <div class="form-group">
-                            <label for="matrixText" data-i18n="matrixText">chữ chính mưa chữ:</label>
-                            <input type="text" id="matrixText" value="HAPPYBIRTHDAY"
-                                placeholder="Nhập chữ cho hiệu ứng mưa chữ" data-i18n-placeholder="matrixText">
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="colorTheme">Chọn màu:</label>
-                            <div class="color-theme-buttons">
-                                <button type="button" class="color-theme-btn active" data-theme="pink">
-                                    <div class="color-preview pink-preview"></div>
-                                    <span data-i18n="pinkTheme">Hồng ngọt ngào</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="blue">
-                                    <div class="color-preview blue-preview"></div>
-                                    <span data-i18n="blueTheme">Xanh dương mát mẻ</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="purple">
-                                    <div class="color-preview purple-preview"></div>
-                                    <span data-i18n="purpleTheme">Tím mộng mơ</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="custom">
-                                    <div class="color-preview custom-preview"></div>
-                                    <span data-i18n="customTheme">Tùy chỉnh màu</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-row" id="customColorSection" style="display: none;">
-                            <div class="form-group">
-                                <label for="matrixColor1" data-i18n="matrixColor1">Màu mưa chữ 1:</label>
-                                <input type="color" id="matrixColor1" value="#ff69b4">
-                            </div>
-                            <div class="form-group">
-                                <label for="matrixColor2" data-i18n="matrixColor2">Màu mưa chữ 2:</label>
-                                <input type="color" id="matrixColor2" value="#ff1493">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="sequence">✨ Cài Đặt chữ chính</h3>
-                        <div class="form-group">
-                            <label for="sequenceText" data-i18n="sequenceText">Nội Dung chữ chính:</label>
-                            <span data-i18n="noteSequence"
-                                style="color: rgb(132, 132, 132); font-weight: normal; font-size: 12px; display: block; margin-bottom: 5px;">
-                                lưu ý: hãy ngăn cách bằng dấu | để tách từ, không nên để một dòng quá dài
-                            </span>
-                            <input type="text" id="sequenceText" value="CHÚC|MỪNG|SINH|NHẬT|BÉ|VINH|IU|CỦA|ANH|❤"
-                                placeholder="Ví dụ: CHÚC|MỪNG|SINH|NHẬT|..." data-i18n-placeholder="sequenceText">
-                        </div>
-                        <div class="form-group" id="sequenceColorSection" style="display: none;">
-                            <label for="sequenceColor" data-i18n="sequenceColor">Màu chữ chính:</label>
-                            <input type="color" id="sequenceColor" value="#ff69b4">
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="gift">🎁 Cài Đặt Hình Động</h3>
-                        <div class="form-group">
-                            <label for="giftImage" data-i18n="giftImage">Hình Động (tùy chọn):</label>
-                            <select id="giftImage">
-                                <option value="" data-i18n="noGif">Không có</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="enableBook" data-i18n="enableBook">Hiển thị sách:</label>
-                        <select id="enableBook">
-                            <option value="true" data-i18n="on">Bật</option>
-                            <option value="false" data-i18n="off">Tắt</option>
-                        </select>
-                    </div>
-                    <div class="settings-section" id="bookSettingsSection">
-                        <h3 data-i18n="book">📖 Cài Đặt Trang Sách</h3>
-                        <div id="pageConfigs">
-                        </div>
-                        <div class="form-group">
-                            <label for="enableHeart" data-i18n="enableHeart">Hiển thị hiệu ứng trái tim:</label>
-                            <select id="enableHeart">
-                                <option value="true" data-i18n="on">Bật</option>
-                                <option value="false" data-i18n="off">Tắt</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="isSave" data-i18n="isSave">Lưu QR vĩnh viễn:</label>
-                        <input type="checkbox" id="isSave" style="margin-left: 10px;">
-                        <span style="margin-left: 5px; font-size: 12px; color: #666;" data-i18n="saveForeverPrice">(Thêm 20.000đ)</span>
-                    </div>
-                    <div class="settings-p"
-                        style="margin-bottom: 12px; background: #fff8e1; color: #b26a00; border-radius: 7px; padding: 10px 14px; font-size: 15px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);">
-                        <div class="settings-p" style="margin-bottom: 4px;">
-                            ⏳ Hạn sử dụng là <b id="expireDate">30 ngày</b>
-                        </div>
-                        <div data-i18n="followNote" class="settings-p">
-                            🥰 Hãy <a href="https://www.tiktok.com/@iamtritoan?is_from_webapp=1&sender_device=pc"
-                                target="_blank" style="color:#ff0050;font-weight:bold;text-decoration:underline;">follow
-                                mình</a> để cập nhật những website mới nhất, nhanh nhất nhé!
-                        </div>
-                        <div class="settings-p" data-i18n="notVietnamWarning">
-                            ⚠️ Nếu bạn không phải người Việt Nam, bạn sẽ không thanh toán được qua website này, hãy nhắn
-                            tin qua TikTok
-                            <a href="https://www.tiktok.com/@iamtritoan?is_from_webapp=1&sender_device=pc"
-                                target="_blank" style="color:#ff0050;font-weight:bold;text-decoration:underline;">
-                                @iamtritoan</a> để được hỗ trợ thanh toán sản phẩm này.
-                        </div>
-                    </div>
-                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Áp Dụng Cài Đặt</button>
-                </div>
-            </div>
-        </div>
-
-        <audio id="birthdayAudio" loop>
-            <source src="./music/happybirtday_uia.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-
-        <!-- <div class="copyright" data-i18n="copyright">
-            Website được tạo bởi tiktok: <a
-                href="https://www.tiktok.com/@iamtritoan?is_from_webapp=1&sender_device=pc">iamtritoan</a>
-        </div> -->
-
-        <div id="orientation-lock">
-            <div class="phone-icon">
-                <img src="./image/screen.png" alt="">
-            </div>
-        </div>
-        <!-- Modal Payment-->
-        <div id="paymentModal"
-            style="display:none; position:fixed; top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:99999;">
-            <div
-                style="position:relative; margin: 5% auto; width: 90%; max-width: 800px; background:white; padding:20px; border-radius:10px;">
-                <button onclick="document.getElementById('paymentModal').style.display='none'"
-                    style="position:absolute;top:10px;right:10px;">✖</button>
-                <iframe id="paymentIframe" style="width:100%; height:600px; border:none;"></iframe>
-            </div>
-        </div>
-        <!-- Nút Full màn hình, chỉ hiện trên Android -->
-        <button id="fullscreenBtn" style="
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 990010;
-            padding: 10px 18px;
-            border-radius: 8px;
-            border: none;
-            background: #222;
-            color: #fff;
-            font-size: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            cursor: pointer;
-            display: none;
-">
-            <img style="
-                width: 20px;
-                height: 20px;
-                vertical-align: middle;" src="./image/full.png" alt="">
-        </button>
-        <script src="./jscp/detect-devtools.js"></script>
-        <script type='text/javascript'>
-            // Bypass for developers
-            const keyName = 'key';
-            const keyValue = '9ac7ec230e0e4513578f309d6d3579ad';
-
-            // Handle via config
-            DisableDevtool({
-                tkName: keyName,
-                md5: keyValue,
-                interval: '100',
-            });
-        </script>
-        <script src="./lang.js"></script>
-        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-        <script src="./jscp/api.obf.js"></script>
-        <script src="./jscp/auth.obf.js"></script>
-        <script src="./jscp/voucher.obf.js"></script>
-        <script src="./jscp/settings.js"></script>
-        <script src="./jscp/main.js"></script>
-        <script src="./jscp/ui.js"></script>
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
-
 </html>
